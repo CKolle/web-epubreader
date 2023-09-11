@@ -11,3 +11,8 @@ En rust server med et simpelt web grensesnitt som lar brukeren lese epub filer.
 - [ ] Lagre progresjon
 - [ ] Legge til mer metadata om bøker
 - [ ] Refaktorere koden for å bli mer oversiktelig
+
+
+# Bilder 
+![image](https://github.com/CKolle/web-epubreader/assets/115696142/683d5178-d15e-4fe9-8f0b-094c28d2e1ea)
+![image](https://github.com/CKolle/web-epubreader/assets/115696142/ba38d8a0-35cf-4500-9ca3-3fd8c312bc5e)

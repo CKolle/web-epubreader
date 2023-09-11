@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+/* Colour palette */
+:root {
+  --main-colour: #434a50;
+  --main-colour-dark: #2c3e50;
+  --main-colour-light: #5c6b77;
+  --main-colour-red: rgb(167, 2, 2);
+  --main-colour-red-dark: rgb(119, 0, 0);
+
+  --secondary-colour: #54a3df;
+  --secondary-colour-dark: #4d8ccf;
+  --font-colour: #d6edff;
+  --background-colour-trans: rgba(67, 74, 80, 0.8);
+  --background-colour: var(--main-colour);
+
+  --hamburger-width-closed: 70px;
+  --hamburger-width-open: 200px;
+  --hamburger-width: var(--hamburger-width-closed);
+
+}
+
+
+body {
+  margin: 0;
+  color: var(--font-colour);
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background-colour);
+}
+
+a {
+  color: var(--font-colour);
+  text-decoration: none;
+}
+
+.page-container {
+  padding-left: var(--hamburger-width);
+  margin-top: 50px;
+  transition: padding-left 0.3s;
+  overflow-x: hidden;
+  position: relative;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 10px 20px;
+  cursor: pointer;
+  color: #fff;
+  background-color: var(--secondary-colour);
+  border: none;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: var(--secondary-colour-dark);
+}

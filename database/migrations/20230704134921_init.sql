@@ -1,0 +1,81 @@
+-- Add migration script here
+CREATE TABLE IF NOT EXISTS users
+(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS bearer_tokens
+(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    token VARCHAR(255) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE IF NOT EXISTS folders
+(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nickname VARCHAR(255) NOT NULL,
+    path VARCHAR(255) NOT NULL,
+    watch BOOLEAN NOT NULL,
+    drop_type VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS libraries
+(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    path VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS collections
+(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    library_id INTEGER NOT NULL,
+    path VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    FOREIGN KEY (library_id) REFERENCES libraries(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS books
+(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    library_id INTEGER NOT NULL,
+    collection_id INTEGER NOT NULL,
+    asset_id VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    primary_cover VARCHAR(255),
+    FOREIGN KEY (library_id) REFERENCES libraries(id) ON DELETE CASCADE,
+    FOREIGN KEY (collection_id) REFERENCES collections(id),
+    FOREIGN KEY (asset_id) REFERENCES assets(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS assets
+(
+    id VARCHAR(255) PRIMARY KEY,
+    local_path VARCHAR(255) NOT NULL UNIQUE,
+    file_extension VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS book_covers
+(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    book_id INTEGER NOT NULL,
+    asset_id VARCHAR(255) NOT NULL,
+    FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE,
+    FOREIGN KEY (asset_id) REFERENCES assets(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS book_progress
+(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    book_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    page INTEGER NOT NULL,
+    page_progress REAL NOT NULL,
+    FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
